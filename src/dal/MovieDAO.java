@@ -5,16 +5,37 @@ import be.Movie;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MovieDAO implements IMovieDataAccess {
 
     private static final String MOVIES_FILE = "data/movie_titles.txt";
+    private List<Movie> movies = new ArrayList<>();
 
 
 
     public List<Movie> getAllMovies() throws IOException {
+        Scanner scanner = new Scanner(new FileReader((MOVIES_FILE)));
 
-        return null;
+        while (scanner.hasNextLine()){
+
+            String[] movieInfo = new String[3];
+
+
+
+            String movie = scanner.nextLine();
+
+            movieInfo = movie.split(",", 3);
+
+
+            movies.add(new Movie(Integer.parseInt((movieInfo[0])), Integer.parseInt(movieInfo[1]), movieInfo[2]));
+
+        }
+       return movies;
+
+
+
+
     }
 
     @Override

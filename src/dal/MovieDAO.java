@@ -3,6 +3,7 @@ package dal;
 import be.Movie;
 
 import java.io.*;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,31 +16,27 @@ public class MovieDAO implements IMovieDataAccess {
 
 
     public List<Movie> getAllMovies() throws IOException {
-        Scanner scanner = new Scanner(new FileReader((MOVIES_FILE)));
+       List<Movie> allMovies = new ArrayList<>();
+        File file = new File(MOVIES_FILE);
+        Scanner scanner = new Scanner(file);
 
         while (scanner.hasNextLine()){
+            String movieData = scanner.nextLine();
 
-            String[] movieInfo = new String[3];
-
-
-
-            String movie = scanner.nextLine();
-
-            movieInfo = movie.split(",", 3);
-
-
-            movies.add(new Movie(Integer.parseInt((movieInfo[0])), Integer.parseInt(movieInfo[1]), movieInfo[2]));
-
+            String[] splitMovieData = movieData.split(",");
+            int id = Integer.parseInt(splitMovieData[0]);
+            int year  = Integer.parseInt(splitMovieData[1]);
+            String title = splitMovieData[2];
+            Movie movie = new Movie(id, year, title);
+            allMovies.add(movie);
         }
-       return movies;
-
-
-
+        return allMovies;
 
     }
 
     @Override
     public Movie createMovie(String title, int year) throws Exception {
+        int id = getAllMovies().get(movies.size()-1).getId()+1;
         return null;
     }
 

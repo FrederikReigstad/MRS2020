@@ -7,11 +7,14 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class MovieDAO implements IMovieDataAccess {
 
     private static final String MOVIES_FILE = "data/movie_titles.txt";
     private List<Movie> movies = new ArrayList<>();
+
 
 
 
@@ -36,8 +39,20 @@ public class MovieDAO implements IMovieDataAccess {
 
     @Override
     public Movie createMovie(String title, int year) throws Exception {
-        int id = getAllMovies().get(movies.size()-1).getId()+1;
-        return null;
+        try(FileWriter writer = new FileWriter(MOVIES_FILE, true);
+            BufferedWriter bw = new BufferedWriter(writer)) {
+            int id = getAllMovies().get(getAllMovies().size() - 1).getId() + 1;
+                    Movie m = new  Movie(id, year,title);
+                    bw.append(id + ""  + title);
+                    bw.newLine();
+                    movies.add(m);
+                return m;
+
+
+
+        }
+
+
     }
 
     @Override
@@ -49,7 +64,12 @@ public class MovieDAO implements IMovieDataAccess {
     public void deleteMovie(Movie movie) throws Exception {
 
     }
+    public static void main(String[] args) throws Exception {
+        MovieDAO movieDAO =  new  MovieDAO();
 
+        Movie movie = movieDAO.createMovie("The Retun Of Anrnor",2024);
+
+    }
 
 
 

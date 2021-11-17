@@ -35,7 +35,9 @@ public class MovieDAO_Mock implements IMovieDataAccess {
     }
 
     @Override
-    public void deleteMovie(Movie movie) throws Exception {
+    public void deleteMovie(int movieToDelete) throws Exception {
+
+
 
     }
 

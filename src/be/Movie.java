@@ -33,8 +33,7 @@ public class Movie {
     }
 
     @Override
-    public String toString()
-    {
-        return id + ": " + title + " ("+year+")";
+    public String toString() {
+        return id + "," + year + "," + title;
     }
 }

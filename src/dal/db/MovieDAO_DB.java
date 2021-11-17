@@ -31,7 +31,7 @@ public class MovieDAO_DB implements IMovieDataAccess {
         throw new UnsupportedOperationException();
     }
 
-    public void deleteMovie(Movie movie) throws Exception {
+    public void deleteMovie(int movie) throws Exception {
         //TODO Do this
         throw new UnsupportedOperationException();
     }
